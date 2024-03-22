@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# REQUIRES CONTAINER_PASS ENV VAR
+
+set -eu
+
+counter=0
+BASE_PORT=5432
+
+sanitize_argument() {
+    # Replace special characters with escape sequences
+    echo "$1" | sed 's/[^a-zA-Z0-9_]/\\&/g'
+}
+
+create_container() {
+    export INSTANCE_NAME="psql_${1}"
+    export PORT=$2
+    docker run -d \
+	    --name "${INSTANCE_NAME}" -e POSTGRES_PASSWORD="${CONTAINER_PASS}" \
+	    -p $PORT:5432 \
+        "postgres:16-alpine"
+}
+
+DOCKER_VERSION=$(eval docker --version)
+if [ -z $DOCKER_VERSION ]; then
+    echo "Docker is not installed"
+    exit 1
+else 
+    printf "Using $DOCKER_VERSION\n"
+fi
+
+for instance in "$@"
+do
+    # Sanitize the argument
+    PORT=$(($BASE_PORT + $counter))
+    SANITIZED_ARG=$(sanitize_argument "$instance")
+    create_container $SANITIZED_ARG $PORT
+    (((counter++)))
+done
