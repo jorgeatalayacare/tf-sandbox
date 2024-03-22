@@ -13,8 +13,8 @@ sanitize_argument() {
 }
 
 create_container() {
-    export INSTANCE_NAME="psql_${1}"
-    export PORT=$2
+    INSTANCE_NAME="psql_${1}"
+    PORT=$2
     docker run -d \
 	    --name "${INSTANCE_NAME}" -e POSTGRES_PASSWORD="${CONTAINER_PASS}" \
 	    -p $PORT:5432 \
@@ -31,7 +31,6 @@ fi
 
 for instance in "$@"
 do
-    # Sanitize the argument
     PORT=$(($BASE_PORT + $counter))
     SANITIZED_ARG=$(sanitize_argument "$instance")
     create_container $SANITIZED_ARG $PORT
