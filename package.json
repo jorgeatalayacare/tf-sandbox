@@ -8,6 +8,7 @@
   },
   "author": "Jorge Pemjean Letelier",
   "license": "ISC",
+  "private": true,
   "devDependencies": {
     "@semantic-release/github": "^8.0.4",
     "git-cz": "^4.9.0",
@@ -20,10 +21,9 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/github",
-    "@semantic-release/npm", 
-    {
+    ["@semantic-release/npm", {
       "npmPublish": false
-    }
+    }]
   ],
   "config": {
     "commitizen": {
