@@ -8,10 +8,6 @@
   },
   "author": "Jorge Pemjean Letelier",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jorgeatalayacare/tf-sandbox.git"
-  },
   "devDependencies": {
     "@semantic-release/github": "^8.0.4",
     "git-cz": "^4.9.0",
