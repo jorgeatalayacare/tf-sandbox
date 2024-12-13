@@ -1,0 +1,37 @@
+{
+  "name": "tf-sandbox",
+  "version": "0.1.0",
+  "description": "## Initialize TF project ```bash $ tf init && tf fmt -recursive ```",
+  "main": "main.tf",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jorge Pemjean Letelier",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgeatalayacare/tf-sandbox.git"
+  },
+  "devDependencies": {
+    "@semantic-release/github": "^8.0.4",
+    "git-cz": "^4.9.0",
+    "semantic-release": "^19.0.3"
+  },
+  "release": {
+    "branches": ["main"]
+  },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/github",
+    "@semantic-release/npm", 
+    {
+      "npmPublish": false
+    }
+  ],
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
+  }
+}
